@@ -9,7 +9,7 @@ import {
   deleteTripDestination,
 } from '../../../lib/api';
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
 
 type Trip = {
   id: number;
