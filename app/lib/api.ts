@@ -23,6 +23,7 @@ export type RecentTrip = {
   budget: number;
   rating: number;
   status: string;
+  image_url?: string | null;
 };
 
 export async function getUser(userId: number): Promise<UserDetail> {
