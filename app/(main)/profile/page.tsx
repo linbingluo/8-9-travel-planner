@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
+
 export default function ProfilePage() {
   const [user, setUser] = useState<any>(null);
   const [username, setUsername] = useState('');
@@ -35,7 +37,7 @@ export default function ProfilePage() {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:8000/user/${user.id}`, {
+      const response = await fetch(`${API_BASE_URL}/user/${user.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
