@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getStats } from '../../lib/api';
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
+
 type User = {
   id: number;
   username: string;
@@ -135,7 +137,7 @@ export default function SettingsPage() {
     if (!user) return;
     setProfileMsg('');
     try {
-      const res = await fetch(`http://localhost:8000/user/${user.id}`, {
+      const res = await fetch(`${API_BASE_URL}/user/${user.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: editUsername, email: editEmail }),
@@ -176,7 +178,7 @@ export default function SettingsPage() {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:8000/user/${user.id}`, {
+      const res = await fetch(`${API_BASE_URL}/user/${user.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password: newPassword }),
@@ -206,7 +208,7 @@ export default function SettingsPage() {
     if (!user) return;
     if (!confirm('Are you sure you want to delete your account? This cannot be undone.')) return;
     try {
-      await fetch(`http://localhost:8000/user/${user.id}`, { method: 'DELETE' });
+      await fetch(`${API_BASE_URL}/user/${user.id}`, { method: 'DELETE' });
     } catch {}
     localStorage.removeItem('user');
     router.replace('/');
